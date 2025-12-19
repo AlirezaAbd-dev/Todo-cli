@@ -38,7 +38,10 @@ fn main() {
             State::GetSingle => {
                 println!("Get Single")
             }
-            State::Exit => break,
+            State::Exit => {
+                clearscreen::clear().expect("failed to clear screen");
+                break;
+            }
         }
     }
 }
