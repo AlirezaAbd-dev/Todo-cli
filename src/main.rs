@@ -1,8 +1,9 @@
 use std::io::stdin;
 
-use crate::models::clap::State;
+use crate::{actions::create_todo, cli::create_state, models::clap::State};
 
 mod actions;
+mod cli;
 mod models;
 
 fn main() {
@@ -24,7 +25,7 @@ fn main() {
 
         match State::new(&input) {
             State::Create => {
-                println!("Create")
+                create_state();
             }
             State::Update => {
                 println!("Update")

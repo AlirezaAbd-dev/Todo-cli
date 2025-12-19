@@ -17,3 +17,13 @@ impl Display for Todo {
         )
     }
 }
+
+impl Todo {
+    pub fn new() -> Self {
+        Todo {
+            id: 0,
+            name: String::new(),
+            status: TodoStatus::Pending,
+        }
+    }
+}
