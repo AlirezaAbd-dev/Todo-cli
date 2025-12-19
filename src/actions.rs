@@ -52,3 +52,54 @@ pub fn create_todo(name: &str, status: TodoStatus) {
         println!("Successfully created todo: {}", name);
     }
 }
+
+pub fn update_todo(id: u64, name: &str, status: TodoStatus) {
+    let mut todos = get_todos().unwrap_or_default();
+
+    if let Some(todo) = todos.iter_mut().find(|todo| todo.id == id) {
+        todo.name = name.to_string();
+        todo.status = status;
+    }
+
+    let mut json_array = json::Array::new();
+    for t in todos {
+        json_array.push(json::object! {
+            "id": t.id,
+            "name": t.name,
+            "status": t.status.to_string()
+        });
+    }
+
+    let final_json = json::object! { "todos": json_array };
+
+    if let Err(e) = fs::write("todos.json", final_json.pretty(4)) {
+        eprintln!("Failed to save todo: {}", e);
+    } else {
+        println!("Successfully updated todo: {}", name);
+    }
+}
+
+pub fn delete_todo(id: u64) {
+    let mut todos = get_todos().unwrap_or_default();
+
+    if let Some(index) = todos.iter().position(|todo| todo.id == id) {
+        todos.remove(index);
+    }
+
+    let mut json_array = json::Array::new();
+    for t in todos {
+        json_array.push(json::object! {
+            "id": t.id,
+            "name": t.name,
+            "status": t.status.to_string()
+        });
+    }
+
+    let final_json = json::object! { "todos": json_array };
+
+    if let Err(e) = fs::write("todos.json", final_json.pretty(4)) {
+        eprintln!("Failed to save todo: {}", e);
+    } else {
+        println!("Successfully deleted todo: {}", id);
+    }
+}
