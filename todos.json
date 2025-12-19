@@ -27,8 +27,8 @@
         },
         {
             "id": 6,
-            "name": "Learning rust",
-            "status": "Pending"
+            "name": "Edited todo",
+            "status": "Doing"
         }
     ]
 }

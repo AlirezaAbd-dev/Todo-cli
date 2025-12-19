@@ -1,6 +1,6 @@
 use std::fmt::Display;
 
-use crate::todo_status::TodoStatus;
+use crate::models::todo_status::TodoStatus;
 
 pub struct Todo {
     pub id: u64,

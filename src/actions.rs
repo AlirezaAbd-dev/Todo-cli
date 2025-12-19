@@ -1,5 +1,6 @@
-use crate::{todo::Todo, todo_status::TodoStatus};
 use std::fs;
+
+use crate::models::{todo::Todo, todo_status::TodoStatus};
 
 pub fn get_todos() -> Result<Vec<Todo>, String> {
     let data = fs::read_to_string("todos.json").unwrap_or_else(|_| "{\"todos\": []}".to_string());

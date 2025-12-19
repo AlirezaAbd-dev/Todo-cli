@@ -1,26 +1,44 @@
-mod actions;
-mod todo;
-mod todo_status;
+use std::io::stdin;
 
-use crate::actions::{create_todo, get_single_todo, get_todos};
+use crate::models::clap::State;
+
+mod actions;
+mod models;
 
 fn main() {
-    let todos = get_todos().unwrap_or_default();
+    loop {
+        clearscreen::clear().expect("failed to clear screen");
 
-    // for todo in todos {
-    //     println!("ID: {}", todo.id);
-    //     println!("Name: {}", todo.name);
-    //     println!("Status: {}", todo.status);
-    //     println!("-------------------------")
-    // }
+        println!("Welcome to Todo-cli Application");
+        println!("Choose one of the options bellow:");
+        println!("1. Create a new todo");
+        println!("2. Update an existing todo");
+        println!("3. Delete a todo");
+        println!("4. Get all todos");
+        println!("5. Get a single todo");
+        println!("6. Exit");
 
-    // let todo = get_single_todo(5);
+        let mut input = String::new();
 
-    // if let Some(todo) = todo {
-    //     println!("ID: {}", todo.id);
-    //     println!("Name: {}", todo.name);
-    //     println!("Status: {}", todo.status);
-    // }
+        stdin().read_line(&mut input).expect("Failed to read line");
 
-    create_todo("Learning rust", todo_status::TodoStatus::Pending);
+        match State::new(&input) {
+            State::Create => {
+                println!("Create")
+            }
+            State::Update => {
+                println!("Update")
+            }
+            State::Delete => {
+                println!("Delete")
+            }
+            State::GetAll => {
+                println!("Get All")
+            }
+            State::GetSingle => {
+                println!("Get Single")
+            }
+            State::Exit => break,
+        }
+    }
 }
