@@ -1,6 +1,10 @@
 use std::io::stdin;
 
-use crate::{actions::create_todo, cli::create_state, models::clap::State};
+use crate::{
+    actions::create_todo,
+    cli::{create_state, get_todo_state, get_todos_state},
+    models::clap::State,
+};
 
 mod actions;
 mod cli;
@@ -34,11 +38,9 @@ fn main() {
                 println!("Delete")
             }
             State::GetAll => {
-                println!("Get All")
+                get_todos_state();
             }
-            State::GetSingle => {
-                println!("Get Single")
-            }
+            State::GetSingle => get_todo_state(),
             State::Exit => {
                 clearscreen::clear().expect("failed to clear screen");
                 break;

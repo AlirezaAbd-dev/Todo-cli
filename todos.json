@@ -1,34 +1,39 @@
 {
-  "todos": [
-    {
-      "id": 1,
-      "name": "Buy groceries",
-      "status": "Pending"
-    },
-    {
-      "id": 2,
-      "name": "Clean the house",
-      "status": "Pending"
-    },
-    {
-      "id": 3,
-      "name": "Do laundry",
-      "status": "Pending"
-    },
-    {
-      "id": 4,
-      "name": "Walk the dog",
-      "status": "Pending"
-    },
-    {
-      "id": 5,
-      "name": "Learning rust",
-      "status": "Pending"
-    },
-    {
-      "id": 6,
-      "name": "Edited todo",
-      "status": "Doing"
-    }
-  ]
+    "todos": [
+        {
+            "id": 1,
+            "name": "Buy groceries",
+            "status": "Pending"
+        },
+        {
+            "id": 2,
+            "name": "Clean the house",
+            "status": "Pending"
+        },
+        {
+            "id": 3,
+            "name": "Do laundry",
+            "status": "Pending"
+        },
+        {
+            "id": 4,
+            "name": "Walk the dog",
+            "status": "Pending"
+        },
+        {
+            "id": 5,
+            "name": "Learning rust",
+            "status": "Pending"
+        },
+        {
+            "id": 6,
+            "name": "Edited todo",
+            "status": "Doing"
+        },
+        {
+            "id": 7,
+            "name": "Sample todo",
+            "status": "Done"
+        }
+    ]
 }
