@@ -2,13 +2,8 @@
     "todos": [
         {
             "id": 1,
-            "name": "Buy groceries",
-            "status": "Pending"
-        },
-        {
-            "id": 2,
-            "name": "Clean the house",
-            "status": "Pending"
+            "name": "This is an edited todo name",
+            "status": "Doing"
         },
         {
             "id": 3,
@@ -29,11 +24,6 @@
             "id": 6,
             "name": "Edited todo",
             "status": "Doing"
-        },
-        {
-            "id": 7,
-            "name": "Sample todo",
-            "status": "Done"
         }
     ]
 }

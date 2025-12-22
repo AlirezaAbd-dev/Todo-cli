@@ -1,8 +1,7 @@
 use std::io::stdin;
 
 use crate::{
-    actions::create_todo,
-    cli::{create_state, get_todo_state, get_todos_state},
+    cli::{create_state, delete_todo_state, get_todo_state, get_todos_state, update_todo_state},
     models::clap::State,
 };
 
@@ -32,11 +31,9 @@ fn main() {
                 create_state();
             }
             State::Update => {
-                println!("Update")
+                update_todo_state();
             }
-            State::Delete => {
-                println!("Delete")
-            }
+            State::Delete => delete_todo_state(),
             State::GetAll => {
                 get_todos_state();
             }

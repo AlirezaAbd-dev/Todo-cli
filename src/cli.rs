@@ -1,7 +1,7 @@
 use std::io::stdin;
 
 use crate::{
-    actions::{create_todo, get_single_todo, get_todos},
+    actions::{create_todo, delete_todo, get_single_todo, get_todos, update_todo},
     models::{clap::State, todo::Todo, todo_status::TodoStatus},
 };
 
@@ -97,6 +97,103 @@ pub fn get_todo_state() {
                 println!("Please try again:");
                 stdin().read_line(&mut input).expect("failed to read line");
                 continue;
+            }
+        }
+    }
+}
+
+pub fn update_todo_state() {
+    loop {
+        clearscreen::clear().expect("failed to clear screen");
+
+        println!("Please enter the id of todo:");
+
+        let mut input = String::new();
+
+        stdin().read_line(&mut input).expect("failed to read line");
+
+        let id: Result<u64, _> = input.trim().parse();
+
+        match id {
+            Ok(id) => {
+                clearscreen::clear().expect("failed to clear screen");
+
+                let find_todo = get_single_todo(id);
+
+                match find_todo {
+                    Some(todo) => {
+                        let mut new_todo = Todo::new();
+                        println!(
+                            "Please enter the new name:(previous name was \"{}\")",
+                            todo.name
+                        );
+
+                        input = String::new();
+                        stdin().read_line(&mut input).expect("failed to read line");
+                        new_todo.name = input.trim().to_string();
+                        clearscreen::clear().expect("failed to clear screen");
+
+                        println!("Please enter the new status: (Pending, Doing, Done)");
+
+                        input = String::new();
+                        stdin().read_line(&mut input).expect("failed to read line");
+                        new_todo.status = TodoStatus::new(&input.trim().to_string());
+                        clearscreen::clear().expect("failed to clear screen");
+
+                        update_todo(id, &new_todo.name, new_todo.status);
+
+                        println!("Updated todo: ");
+                        println!("ID: {}", id);
+                        println!("Name: {}", new_todo.name);
+                        println!("Status: {}", input);
+
+                        println!("Please hit the enter to exit to home!");
+                    }
+                    None => {
+                        println!("Todo not found!");
+                        println!("Please try again:");
+                        stdin().read_line(&mut input).expect("failed to read line");
+                    }
+                }
+
+                stdin().read_line(&mut input).expect("failed to read line");
+
+                break;
+            }
+            Err(_) => {
+                println!("Invalid id");
+                println!("Please try again:");
+                stdin().read_line(&mut input).expect("failed to read line");
+            }
+        }
+    }
+}
+
+pub fn delete_todo_state() {
+    loop {
+        clearscreen::clear().expect("failed to clear screen");
+
+        println!("Please enter the id of todo:");
+
+        let mut input = String::new();
+
+        stdin().read_line(&mut input).expect("failed to read line");
+
+        let id: Result<u64, _> = input.trim().parse();
+
+        match id {
+            Ok(id) => {
+                delete_todo(id);
+
+                println!("Please hit the enter to exit to home!");
+                stdin().read_line(&mut input).expect("failed to read line");
+
+                break;
+            }
+            Err(_) => {
+                println!("Invalid id");
+                println!("Please try again:");
+                stdin().read_line(&mut input).expect("failed to read line");
             }
         }
     }
